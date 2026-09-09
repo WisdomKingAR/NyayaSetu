@@ -16,23 +16,27 @@ function requireEnv(key: string): string {
  * Validates that the service role key is not mistakenly set to the public anon key.
  * If an anon key is used, Postgres RLS will reject server-side operations.
  */
-const VERIFIED_SERVICE_ROLE_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqYXByem1ra3BvcmdmeXhmZWNrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODkyMDMwNiwiZXhwIjoyMTA0NDk2MzA2fQ.5GZObY2ugHQ2uKcEmRZxoD8P6vpf4TX497lpg5btjMg';
-
+/**
+ * Validates that the service role key is not mistakenly set to the public anon key.
+ * Throws at startup with a clear message rather than silently falling back,
+ * so misconfiguration is never hidden.
+ */
 function validateServiceRoleKey(key: string): string {
   try {
     const parts = key.split('.');
     if (parts.length === 3) {
       const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8'));
       if (payload.role === 'anon') {
-        console.warn(
-          '[config] Self-Healing: SUPABASE_SERVICE_ROLE_KEY is set to an anon key. Automatically substituting verified service_role key to bypass Row-Level Security.',
+        throw new Error(
+          '[config] SUPABASE_SERVICE_ROLE_KEY is set to the public anon key. ' +
+          'Row-Level Security will block all server-side DB operations. ' +
+          'Set the secret service_role key in your environment variables.',
         );
-        return VERIFIED_SERVICE_ROLE_KEY;
       }
     }
-  } catch {
-    // Ignore payload parse errors
+  } catch (err) {
+    // Re-throw config errors; ignore JWT parse failures for non-JWT formats
+    if (err instanceof Error && err.message.startsWith('[config]')) throw err;
   }
   return key;
 }
@@ -57,7 +61,9 @@ export const config = {
 
   gemini: {
     apiKey: requireEnv('GEMINI_API_KEY'),
-    model: process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
+    // Default to gemini-2.0-flash — a real, stable, fast model.
+    // Override via GEMINI_MODEL env var if needed.
+    model: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
   },
 
   cors: {

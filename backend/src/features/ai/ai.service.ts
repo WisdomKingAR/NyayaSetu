@@ -14,11 +14,10 @@ export async function generateWithFallback(
 ): Promise<string> {
   const candidateModels = [
     config.gemini.model,
-    'gemini-3.1-flash-lite',
-    'gemini-3.5-flash-lite',
-    'gemini-3.7-flash',
-    'gemini-flash-latest',
-    'gemini-3.5-flash',
+    'gemini-2.0-flash',
+    'gemini-1.5-flash',
+    'gemini-1.5-flash-8b',
+    'gemini-2.0-flash-lite',
   ];
   const uniqueModels = [...new Set(candidateModels.filter(Boolean))];
 
@@ -53,19 +52,24 @@ export const aiService = {
     const rawText = await generateWithFallback(EXTRACTION_PROMPT(ocrText));
 
     try {
-      // Strip any accidental markdown code fences before parsing
-      const cleaned = rawText
-        .replace(/^```json\s*/i, '')
-        .replace(/^```\s*/i, '')
-        .replace(/\s*```$/i, '')
-        .trim();
+      // Find the outermost JSON object by bracket position.
+      // This is robust against Gemini adding prose, code fences, or any
+      // prefix/suffix text — we grab exactly what is between { and }.
+      const start = rawText.indexOf('{');
+      const end = rawText.lastIndexOf('}');
 
-      const parsed = JSON.parse(cleaned);
+      if (start === -1 || end === -1 || end <= start) {
+        throw new Error('No JSON object found in Gemini response');
+      }
+
+      const parsed = JSON.parse(rawText.slice(start, end + 1));
 
       return {
         caseNumber:
           parsed.case_number === 'Unknown' ? undefined : parsed.case_number,
-        parties: Array.isArray(parsed.parties) ? parsed.parties : undefined,
+        parties: Array.isArray(parsed.parties) && parsed.parties.length > 0
+          ? parsed.parties
+          : undefined,
         courtName:
           parsed.court_name === 'Unknown' ? undefined : parsed.court_name,
         nextHearingDate:
