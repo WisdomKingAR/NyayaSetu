@@ -1,4 +1,4 @@
-﻿import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 const BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000').replace(/\/+$/, '');
 
@@ -49,9 +49,9 @@ export async function uploadDocument(file: File, userId?: string) {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await apiClient.post('/api/documents/upload', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
+  // Do NOT set Content-Type manually — Axios will auto-set
+  // 'multipart/form-data; boundary=...' correctly from FormData
+  const response = await apiClient.post('/api/documents/upload', formData);
   return response.data;
 }
 
