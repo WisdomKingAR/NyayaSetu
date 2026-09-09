@@ -41,8 +41,14 @@ export function createApp() {
     }),
   );
 
-  // --- Body parsing (1MB limit prevents JSON payload DOS) ---
-  app.use(express.json({ limit: '1mb' }));
+  // --- Body parsing (1MB limit prevents JSON payload DOS; bypassed for file uploads) ---
+  app.use((req, res, next) => {
+    const contentType = req.headers['content-type'] || '';
+    if (contentType.startsWith('multipart/form-data') || req.path.includes('/upload')) {
+      return next();
+    }
+    express.json({ limit: '1mb' })(req, res, next);
+  });
 
   // --- Request logging (dev debugging) ---
   app.use(requestLogger);

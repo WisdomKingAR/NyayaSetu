@@ -47,19 +47,37 @@ apiClient.interceptors.response.use(
 
 // ─── Typed API helpers ───────────────────────────────────────────────────────
 
-/** Upload a file and create a document record */
+/** Upload a file and create a document record using native fetch for clean multipart boundary */
 export async function uploadDocument(file: File, userId?: string) {
   const formData = new FormData();
   formData.append('file', file);
   if (userId) formData.append('userId', userId);
 
-  // Explicitly override the apiClient instance's default 'application/json' header
-  const response = await apiClient.post('/api/documents/upload', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+  const token =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('nyaya_access_token')
+      : null;
+
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${BASE_URL}/api/documents/upload`, {
+    method: 'POST',
+    headers,
+    body: formData,
   });
-  return response.data;
+
+  const data = await response.json();
+  if (!response.ok) {
+    const errorMsg = data?.error?.message || `Upload failed with status ${response.status}`;
+    const err = new Error(errorMsg) as any;
+    err.response = { status: response.status, data };
+    throw err;
+  }
+
+  return data;
 }
 
 /** Trigger the OCR → Summarize → Translate pipeline */
