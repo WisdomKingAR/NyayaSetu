@@ -82,7 +82,11 @@ export async function uploadDocument(file: File, userId?: string) {
 
 /** Trigger the OCR → Summarize → Translate pipeline */
 export async function processDocument(documentId: string) {
-  const response = await apiClient.post(`/api/documents/${documentId}/process`, null, { timeout: 120_000 });
+  // NOTE: Must send {} not null.
+  // Axios serialises null → "null" (because Content-Type: application/json is a default header).
+  // Express json() with strict:true rejects the literal "null" value (only accepts {} or []),
+  // which causes a 400 "Malformed JSON body in request" before the route handler is even reached.
+  const response = await apiClient.post(`/api/documents/${documentId}/process`, {}, { timeout: 120_000 });
   return response.data;
 }
 
