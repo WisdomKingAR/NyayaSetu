@@ -2,6 +2,7 @@
 import multer from 'multer';
 import { documentsController } from './documents.controller';
 import { fileFilter, MAX_FILE_SIZE_BYTES } from '../../middleware/fileValidator';
+import { optionalAuth } from '../../middleware/authMiddleware';
 
 export const documentsRouter = Router();
 
@@ -16,16 +17,17 @@ const upload = multer({
 
 /**
  * GET /api/documents
- * List all documents, optional search filter
+ * List all documents, optional search filter, optional authenticated user context
  */
-documentsRouter.get('/', documentsController.handleList);
+documentsRouter.get('/', optionalAuth, documentsController.handleList);
 
 /**
  * POST /api/documents/upload
- * Upload document to Supabase storage + create document entity
+ * Upload document to Supabase storage + create document entity (guest or user-associated)
  */
 documentsRouter.post(
   '/upload',
+  optionalAuth,
   upload.single('file'),
   documentsController.handleUpload,
 );

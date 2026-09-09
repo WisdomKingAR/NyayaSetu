@@ -1,8 +1,9 @@
-import type { DocumentStatus } from '../../types';
+﻿import type { DocumentStatus } from '../../types';
 
-/** Full Document entity � camelCase mirror of the Supabase 'documents' table */
+/** Full Document entity — camelCase mirror of the Supabase 'documents' table */
 export interface Document {
   id: string;
+  userId?: string;
   filename: string;
   filePath: string;
   fileUrl: string;
@@ -36,6 +37,7 @@ export interface CreateDocumentInput {
   filePath: string;
   fileUrl: string;
   isHandwritten: boolean;
+  userId?: string;
 }
 
 /** All fields that can be updated after OCR extraction + translation */

@@ -62,7 +62,11 @@ export const documentsController = {
         req.body?.isHandwritten === true ||
         req.body?.isHandwritten === 'true';
 
-      const doc = await documentsService.uploadDocument(file, isHandwritten);
+      const doc = await documentsService.uploadDocument(
+        file,
+        isHandwritten,
+        req.user?.id,
+      );
 
       res.status(201).json({
         success: true,
@@ -71,6 +75,7 @@ export const documentsController = {
           filename: doc.filename,
           status: doc.status,
           fileUrl: doc.fileUrl,
+          userId: doc.userId,
         },
       });
     } catch (err) {

@@ -12,6 +12,7 @@ import type {
 function toDomain(row: Record<string, unknown>): Document {
   return {
     id: row.id as string,
+    userId: (row.user_id as string) ?? undefined,
     filename: row.filename as string,
     filePath: row.file_path as string,
     fileUrl: row.file_url as string,
@@ -41,15 +42,21 @@ export const documentsRepository = {
    * Create a new document record.
    */
   async create(input: CreateDocumentInput): Promise<Document> {
+    const insertPayload: Record<string, unknown> = {
+      filename: input.filename,
+      file_path: input.filePath,
+      file_url: input.fileUrl,
+      is_handwritten: input.isHandwritten ?? false,
+      status: 'pending',
+    };
+
+    if (input.userId) {
+      insertPayload.user_id = input.userId;
+    }
+
     const { data, error } = await supabaseAdmin
       .from('documents')
-      .insert({
-        filename: input.filename,
-        file_path: input.filePath,
-        file_url: input.fileUrl,
-        is_handwritten: input.isHandwritten ?? false,
-        status: 'pending',
-      })
+      .insert(insertPayload)
       .select()
       .single();
 

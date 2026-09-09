@@ -22,6 +22,7 @@ export const config = {
   supabase: {
     url: requireEnv('SUPABASE_URL'),
     serviceRoleKey: requireEnv('SUPABASE_SERVICE_ROLE_KEY'),
+    anonKey: process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '',
   },
 
   sarvam: {
@@ -31,7 +32,6 @@ export const config = {
 
   gemini: {
     apiKey: requireEnv('GEMINI_API_KEY'),
-    // Default to gemini-2.5-flash as confirmed
     model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
   },
 

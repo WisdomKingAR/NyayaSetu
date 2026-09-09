@@ -1,4 +1,4 @@
-import express from 'express';
+ï»¿import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { config } from './config';
@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorHandler';
 import { requestLogger } from './middleware/requestLogger';
 import { healthRouter } from './features/health/health.router';
 import { documentsRouter } from './features/documents/documents.router';
+import { authRouter } from './features/auth/auth.router';
 
 /**
  * Express app factory.
@@ -19,17 +20,16 @@ export function createApp() {
   // --- Security headers (applied globally, before any routes) ---
   app.use(helmet());
 
-  // --- CORS: restricted to the exact Vercel frontend URL ---
-  // Do NOT use origin: '*' — this would expose the API to any origin.
+  // --- CORS: restricted to frontend URL with Authorization & Content-Type allowed ---
   app.use(
     cors({
       origin: config.cors.frontendUrl,
       methods: ['GET', 'POST', 'OPTIONS'],
-      allowedHeaders: ['Content-Type'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
     }),
   );
 
-  // --- Body parsing ---
+  // --- Body parsing (1MB limit prevents JSON payload DOS) ---
   app.use(express.json({ limit: '1mb' }));
 
   // --- Request logging (dev debugging) ---
@@ -37,13 +37,13 @@ export function createApp() {
 
   // --- Health route: mounted BEFORE the rate limiter ---
   // UptimeRobot pings /health every 5 min to keep Render warm.
-  // It cannot send API keys or auth headers, so this must be unrestricted.
   app.use('/health', healthRouter);
 
-  // --- Rate limiter: applied only to /api/* ---
+  // --- Rate limiter: applied to all /api/* routes ---
   app.use('/api', apiRateLimiter);
 
   // --- Feature routers ---
+  app.use('/api/auth', authRouter);
   app.use('/api/documents', documentsRouter);
 
   // --- Global error handler: MUST be last ---

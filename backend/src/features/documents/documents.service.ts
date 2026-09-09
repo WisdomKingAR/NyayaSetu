@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+﻿import { v4 as uuid } from 'uuid';
 import { supabaseAdmin } from '../../lib/supabaseAdmin';
 import { documentsRepository } from './documents.repository';
 import { ocrService } from '../ocr/ocr.service';
@@ -9,8 +9,8 @@ import type { Document } from './documents.types';
 /**
  * Documents feature business logic and pipeline orchestration.
  *
- * This is the only place that coordinates across services (OCR, AI, Translation).
- * Controllers call methods here � they never orchestrate directly.
+ * Coordinates across services (OCR, AI, Translation).
+ * Controllers call methods here — they never orchestrate directly.
  * The repository is the only place that touches the DB.
  */
 export const documentsService = {
@@ -18,12 +18,14 @@ export const documentsService = {
    * Uploads a file to Supabase Storage and creates a document record.
    *
    * @param file - Multer file object (buffer from memory storage)
-   * @param isHandwritten - Whether to flag document as handwritten (affects OCR fallback logic)
+   * @param isHandwritten - Whether to flag document as handwritten
+   * @param userId - Optional authenticated user ID
    * @returns Created document with status 'pending'
    */
   async uploadDocument(
     file: Express.Multer.File,
     isHandwritten: boolean,
+    userId?: string,
   ): Promise<Document> {
     // Generate a unique storage path to avoid collisions
     const filePath = `${uuid()}-${file.originalname}`;
@@ -48,18 +50,12 @@ export const documentsService = {
       filePath,
       fileUrl: urlData.publicUrl,
       isHandwritten,
+      userId,
     });
   },
 
   /**
    * Runs the full OCR -> Summarize -> Translate pipeline for a document.
-   *
-   * Pipeline steps with DB status updates at each stage:
-   *   pending -> processing -> ocr_complete -> summarized -> complete
-   *                                                      \-> error (on any failure)
-   *
-   * On failure: updates status to 'error' with message, then re-throws
-   * so the controller can return the appropriate HTTP status.
    */
   async processDocument(id: string): Promise<Document> {
     const doc = await documentsRepository.findById(id);
@@ -92,9 +88,7 @@ export const documentsService = {
       const updatedDoc = await documentsRepository.findById(id);
       if (!updatedDoc) throw new Error('Document not found after processing');
       return updatedDoc;
-
     } catch (err) {
-      // Mark as error in DB and re-throw so controller returns 502
       const message = err instanceof Error ? err.message : 'Pipeline failed';
       await documentsRepository.updateStatus(id, 'error', message).catch(() => {});
       throw err;
@@ -108,18 +102,13 @@ export const documentsService = {
     return doc;
   },
 
-  /** List all documents, optionally filtered by case_number or filename */
+  /** List all documents, optionally filtered by search */
   async listDocuments(search?: string): Promise<Document[]> {
     return documentsRepository.list(search);
   },
 
   /**
    * Answers a user question grounded in the document's OCR text.
-   * Document must have status 'complete' (OCR text must be available).
-   *
-   * @param id - Document ID
-   * @param question - User's question (max 500 chars enforced in controller)
-   * @returns Gemini's grounded answer string
    */
   async chatWithDocument(id: string, question: string): Promise<string> {
     const doc = await documentsRepository.findById(id);
