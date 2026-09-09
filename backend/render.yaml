@@ -1,4 +1,4 @@
-services:
+﻿services:
   - type: web
     name: nyayasetu-backend
     runtime: node
@@ -20,4 +20,5 @@ services:
       # - DATABASE_URL (Supavisor Transaction pooler URL on port 6543)
       # - GEMINI_API_KEY
       # - SARVAM_API_KEY
-      # - FRONTEND_URL (e.g. https://nyayasetu.vercel.app)
+      # - FRONTEND_URL: NO trailing slash! (e.g. https://nyaya-setu-amber.vercel.app)
+      #   A trailing slash causes browser CORS violations (RFC 6454 origin comparison).

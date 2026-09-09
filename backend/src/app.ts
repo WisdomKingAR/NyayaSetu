@@ -1,4 +1,4 @@
-﻿import express from 'express';
+import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { config } from './config';
@@ -20,12 +20,24 @@ export function createApp() {
   // --- Security headers (applied globally, before any routes) ---
   app.use(helmet());
 
-  // --- CORS: restricted to frontend URL with Authorization & Content-Type allowed ---
+  // --- CORS: dynamic validator with trailing-slash normalization and Vercel preview support ---
   app.use(
     cors({
-      origin: config.cors.frontendUrl,
-      methods: ['GET', 'POST', 'OPTIONS'],
+      origin: (requestOrigin, callback) => {
+        // Non-browser requests (curl, server-to-server, Render health probe) have no Origin header
+        if (!requestOrigin) return callback(null, true);
+        const normalized = requestOrigin.replace(/\/+$/, '');
+        const isAllowed =
+          config.cors.allowedOrigins.includes(normalized) ||
+          /^https:\/\/[a-z0-9-]+(?:-[a-z0-9]+)*\.vercel\.app$/.test(normalized);
+        if (isAllowed) {
+          return callback(null, true);
+        }
+        return callback(new Error(`CORS blocked for origin: ${requestOrigin}`), false);
+      },
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
       allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
     }),
   );
 
@@ -38,6 +50,7 @@ export function createApp() {
   // --- Health route: mounted BEFORE the rate limiter ---
   // UptimeRobot pings /health every 5 min to keep Render warm.
   app.use('/health', healthRouter);
+  app.use('/api/health', healthRouter);
 
   // --- Rate limiter: applied to all /api/* routes ---
   app.use('/api', apiRateLimiter);

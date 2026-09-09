@@ -1,4 +1,4 @@
-﻿import 'dotenv/config';
+import 'dotenv/config';
 
 /**
  * Reads a required environment variable and throws at startup if missing.
@@ -36,6 +36,16 @@ export const config = {
   },
 
   cors: {
-    frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000',
+    frontendUrl: (process.env.FRONTEND_URL || 'http://localhost:3000').trim().replace(/\/+$/, ''),
+    allowedOrigins: [
+      ...new Set([
+        'http://localhost:3000',
+        'https://nyaya-setu-amber.vercel.app',
+        ...(process.env.FRONTEND_URL || '')
+          .split(',')
+          .map((u) => u.trim().replace(/\/+$/, ''))
+          .filter(Boolean),
+      ]),
+    ],
   },
 } as const;

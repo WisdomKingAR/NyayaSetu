@@ -1,41 +1,51 @@
-import { Router } from 'express';
+ï»¿import { Router } from 'express';
 import { supabaseAdmin } from '../../lib/supabaseAdmin';
 
 export const healthRouter = Router();
 
 /**
- * GET /health
+ * GET and HEAD /health (also aliased at /api/health)
  *
  * Dual purpose:
- * 1. Ops liveness probe — confirms the Express process is running
- * 2. UptimeRobot keep-alive target — pings every 5 min to prevent
- *    Render's free-tier 15-minute idle spin-down
+ * 1. Ops liveness probe - confirms the Express process is running
+ * 2. UptimeRobot keep-alive target - pings every 5 min to prevent
+ *    Render free-tier 15-minute idle spin-down
  *
- * CRITICAL: No authentication middleware must be placed in front of this.
- * UptimeRobot's free plan cannot send API keys or auth headers.
- *
- * Performs a lightweight Supabase liveness check (SELECT id LIMIT 1),
- * not a full table scan, to keep this route fast even under load.
+ * CRITICAL:
+ * - No authentication middleware must be placed in front of this.
+ * - Always returns HTTP 200 to prevent Render zero-downtime deploy failures
+ *   or container restart loops during cold starts or transient DB blips.
+ * - DB health status is reported in the response body ("database": "ok" | "degraded").
  */
-healthRouter.get('/', async (_req, res) => {
-  let dbStatus: 'ok' | 'error' = 'ok';
+healthRouter.all('/', async (_req, res) => {
+  let dbStatus: 'ok' | 'degraded' = 'ok';
 
   try {
-    const { error } = await supabaseAdmin
+    const dbCheckPromise = supabaseAdmin
       .from('documents')
       .select('id')
       .limit(1);
 
-    if (error) dbStatus = 'error';
+    const timeoutPromise = new Promise<{ error: unknown }>((_, reject) =>
+      setTimeout(() => reject(new Error('Database health check timed out')), 3000),
+    );
+
+    const result = (await Promise.race([dbCheckPromise, timeoutPromise])) as {
+      error: unknown;
+    };
+    if (result && result.error) {
+      dbStatus = 'degraded';
+    }
   } catch {
-    dbStatus = 'error';
+    dbStatus = 'degraded';
   }
 
-  const httpStatus = dbStatus === 'ok' ? 200 : 503;
-
-  res.status(httpStatus).json({
-    status: dbStatus === 'ok' ? 'ok' : 'degraded',
-    database: dbStatus,
-    timestamp: new Date().toISOString(),
-  });
+  res
+    .status(200)
+    .set('Cache-Control', 'no-cache, no-store, must-revalidate')
+    .json({
+      status: 'ok',
+      database: dbStatus,
+      timestamp: new Date().toISOString(),
+    });
 });
