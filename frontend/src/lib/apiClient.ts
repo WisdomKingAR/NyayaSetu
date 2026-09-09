@@ -51,10 +51,14 @@ apiClient.interceptors.response.use(
 export async function uploadDocument(file: File, userId?: string) {
   const formData = new FormData();
   formData.append('file', file);
+  if (userId) formData.append('userId', userId);
 
-  // Do NOT set Content-Type manually — Axios will auto-set
-  // 'multipart/form-data; boundary=...' correctly from FormData
-  const response = await apiClient.post('/api/documents/upload', formData);
+  // Explicitly override the apiClient instance's default 'application/json' header
+  const response = await apiClient.post('/api/documents/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data;
 }
 

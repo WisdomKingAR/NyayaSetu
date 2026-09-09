@@ -33,7 +33,10 @@ export function UploadZone({ onSuccess, onUploadComplete, compact = false }: Upl
     async (file: File) => {
       // Validate
       const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'];
-      if (!validTypes.includes(file.type)) {
+      const ext = file.name.toLowerCase().split('.').pop() || '';
+      const isValidExt = ['pdf', 'jpg', 'jpeg', 'png', 'webp'].includes(ext);
+      const isValidMime = validTypes.includes(file.type) || file.type.startsWith('image/');
+      if (!isValidExt && !isValidMime) {
         setState('error');
         setErrorMessage('Invalid file type. Please upload a PDF, JPEG, PNG, or WEBP.');
         return;
@@ -91,8 +94,10 @@ export function UploadZone({ onSuccess, onUploadComplete, compact = false }: Upl
           } catch {}
         }
         setState('error');
+        const serverMsg = (err as any)?.response?.data?.error?.message;
         const message =
-          err instanceof Error ? err.message : 'Upload failed. Please try again.';
+          serverMsg ||
+          (err instanceof Error ? err.message : 'Upload failed. Please try again.');
         setErrorMessage(message);
       }
     },
