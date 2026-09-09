@@ -10,11 +10,7 @@ export default function LandingPage() {
 
   const handleStart = () => {
     if (user) {
-      if (user.role === 'advocate') {
-        router.push('/advocate/dashboard');
-      } else {
-        router.push('/dashboard');
-      }
+      router.push('/dashboard');
     } else {
       router.push('/auth/signup');
     }

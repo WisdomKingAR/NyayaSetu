@@ -1,19 +1,23 @@
 services:
   - type: web
     name: nyayasetu-backend
-    env: node
+    runtime: node
+    region: singapore
     plan: free
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm start"
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     healthCheckPath: /health
     envVars:
-      - key: SUPABASE_URL
-        sync: false
-      - key: SUPABASE_SERVICE_ROLE_KEY
-        sync: false
-      - key: GEMINI_API_KEY
-        sync: false
-      - key: SARVAM_API_KEY
-        sync: false
-      - key: FRONTEND_URL
-        value: https://nyayasetu.vercel.app
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Configure the following secret variables in the Render Dashboard:
+      # - SUPABASE_URL
+      # - SUPABASE_SERVICE_ROLE_KEY
+      # - SUPABASE_ANON_KEY
+      # - DATABASE_URL (Supavisor Transaction pooler URL on port 6543)
+      # - GEMINI_API_KEY
+      # - SARVAM_API_KEY
+      # - FRONTEND_URL (e.g. https://nyayasetu.vercel.app)

@@ -98,7 +98,7 @@ export function Sidebar() {
       {/* ─── Bottom footer ─── */}
       <div className="border-t border-outline-variant pt-space-md flex flex-col gap-space-xs">
         <Link
-          href="/auth/role"
+          href="/auth/select-role"
           className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container transition-colors py-space-xs"
         >
           Change Access Role
