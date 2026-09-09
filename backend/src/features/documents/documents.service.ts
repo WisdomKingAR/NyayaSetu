@@ -134,7 +134,30 @@ export const documentsService = {
       throw new DocumentNotReadyError('Document has no OCR text. Processing may have failed.');
     }
 
-    return aiService.chat(doc.ocrText, question);
+    const answer = await aiService.chat(doc.ocrText, question);
+
+    // If user requested Marathi or asked in Marathi, ensure response is in Marathi
+    const isMarathiRequested =
+      /[\u0900-\u097F]/.test(question) ||
+      /\bmarathi\b/i.test(question) ||
+      question.toLowerCase().includes('मराठी');
+
+    if (isMarathiRequested) {
+      // Check if the generated answer is mostly English (fewer than 10 Devanagari characters)
+      const devanagariCount = (answer.match(/[\u0900-\u097F]/g) || []).length;
+      if (devanagariCount < 10) {
+        try {
+          const translated = await translationService.translate(answer, 'en-IN', 'mr-IN');
+          if (translated && translated.trim().length > 0) {
+            return translated.trim();
+          }
+        } catch {
+          // Fall back to the original answer if translation fails
+        }
+      }
+    }
+
+    return answer;
   },
 };
 
