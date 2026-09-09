@@ -45,13 +45,23 @@ export const documentsService = {
       .getPublicUrl(filePath);
 
     // Create the document record in Postgres
-    return documentsRepository.create({
-      filename: file.originalname,
-      filePath,
-      fileUrl: urlData.publicUrl,
-      isHandwritten,
-      userId,
-    });
+    try {
+      return await documentsRepository.create({
+        filename: file.originalname,
+        filePath,
+        fileUrl: urlData.publicUrl,
+        isHandwritten,
+        userId,
+      });
+    } catch (dbErr: unknown) {
+      const errMsg = dbErr instanceof Error ? dbErr.message : String(dbErr);
+      if (errMsg.includes('row-level security policy')) {
+        throw new Error(
+          'Database insert failed due to Row-Level Security policy. Ensure SUPABASE_SERVICE_ROLE_KEY is set to the secret service_role key, not the public anon key.'
+        );
+      }
+      throw dbErr;
+    }
   },
 
   /**

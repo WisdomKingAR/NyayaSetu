@@ -1,4 +1,4 @@
-import 'dotenv/config';
+﻿import 'dotenv/config';
 
 /**
  * Reads a required environment variable and throws at startup if missing.
@@ -13,6 +13,31 @@ function requireEnv(key: string): string {
 }
 
 /**
+ * Validates that the service role key is not mistakenly set to the public anon key.
+ * If an anon key is used, Postgres RLS will reject server-side operations.
+ */
+function validateServiceRoleKey(key: string): string {
+  try {
+    const parts = key.split('.');
+    if (parts.length === 3) {
+      const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8'));
+      if (payload.role === 'anon') {
+        console.error(
+          '\n=====================================================================\n' +
+          '[config] CRITICAL: SUPABASE_SERVICE_ROLE_KEY is configured with an "anon" public key!\n' +
+          'You MUST replace it with the secret "service_role" key in the Render Dashboard.\n' +
+          'Without the service_role key, document uploads and DB inserts fail with RLS violations.\n' +
+          '=====================================================================\n',
+        );
+      }
+    }
+  } catch {
+    // Ignore payload parse errors
+  }
+  return key;
+}
+
+/**
  * Centralized, validated configuration.
  * All process.env access goes through this object - never scattered across files.
  */
@@ -21,7 +46,7 @@ export const config = {
 
   supabase: {
     url: requireEnv('SUPABASE_URL'),
-    serviceRoleKey: requireEnv('SUPABASE_SERVICE_ROLE_KEY'),
+    serviceRoleKey: validateServiceRoleKey(requireEnv('SUPABASE_SERVICE_ROLE_KEY')),
     anonKey: process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '',
   },
 
