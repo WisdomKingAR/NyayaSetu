@@ -78,9 +78,14 @@ export async function getDocument(documentId: string) {
 }
 
 /** Send a chat message for a specific document */
-export async function chatWithDocument(documentId: string, question: string) {
+export async function chatWithDocument(
+  documentId: string,
+  question: string,
+  language?: 'en' | 'mr',
+) {
   const response = await apiClient.post(`/api/documents/${documentId}/chat`, {
     question,
+    language,
   });
   return response.data;
 }

@@ -1,4 +1,4 @@
-﻿import type { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import {
   documentsService,
   NotFoundError,
@@ -208,7 +208,10 @@ export const documentsController = {
         return;
       }
 
-      const answer = await documentsService.chatWithDocument(id, trimmedQuestion);
+      const targetLanguage =
+        req.body?.language === 'mr' ? 'mr' : req.body?.language === 'en' ? 'en' : undefined;
+
+      const answer = await documentsService.chatWithDocument(id, trimmedQuestion, targetLanguage);
       res.json({
         success: true,
         data: { answer },

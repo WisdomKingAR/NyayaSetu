@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { chatWithDocument } from '@/lib/apiClient';
+import { useUIStore } from '@/stores/ui.store';
 import type { ChatMessage, NyayaDocument } from '@/lib/types';
 
 interface ChatBoxProps {
@@ -9,6 +10,9 @@ interface ChatBoxProps {
 }
 
 export function ChatBox({ document: doc }: ChatBoxProps) {
+  const { language } = useUIStore();
+  const isMr = language === 'mr';
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +41,8 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
     setIsLoading(true);
 
     try {
-      const res = await chatWithDocument(doc.id, question);
-      const answer: string = res.data?.answer ?? 'No response from server.';
+      const res = await chatWithDocument(doc.id, question, language);
+      const answer: string = res.data?.answer ?? (isMr ? 'सर्व्हरकडून उत्तर आले नाही.' : 'No response from server.');
 
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -51,7 +55,9 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Sorry, I could not process your question. Please try again.',
+        content: isMr
+          ? 'क्षमस्व, तुमच्या प्रश्नावर प्रक्रिया होऊ शकली नाही. कृपया पुन्हा प्रयत्न करा.'
+          : 'Sorry, I could not process your question. Please try again.',
         timestamp: new Date(),
         isError: true,
       };
@@ -69,11 +75,17 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
     }
   };
 
-  const SAMPLE_QUESTIONS = [
-    'Who are the parties in this case?',
-    'What is the next hearing date?',
-    'What did the court decide?',
-  ];
+  const SAMPLE_QUESTIONS = isMr
+    ? [
+        'या खटल्यातील पक्षकार कोण आहेत?',
+        'पुढील सुनावणीची तारीख काय आहे?',
+        'न्यायालयाने काय निर्णय दिला?',
+      ]
+    : [
+        'Who are the parties in this case?',
+        'What is the next hearing date?',
+        'What did the court decide?',
+      ];
 
   return (
     <div className="flex flex-col h-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-lg overflow-hidden">
@@ -82,10 +94,12 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
         <span className="material-symbols-outlined text-[20px] text-primary-container">chat_bubble_outline</span>
         <div>
           <h3 className="font-title-md text-title-md text-on-surface font-semibold">
-            Ask about this document
+            {isMr ? 'या दस्तऐवजाबद्दल प्रश्न विचारा' : 'Ask about this document'}
           </h3>
           <p className="font-body-sm text-body-sm text-outline">
-            Answers are grounded strictly in the uploaded document
+            {isMr
+              ? 'उत्तरे केवळ अपलोड केलेल्या दस्तऐवजावर आधारित आहेत'
+              : 'Answers are grounded strictly in the uploaded document'}
           </p>
         </div>
       </div>
@@ -96,7 +110,9 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
           <div className="flex flex-col items-center justify-center h-full text-center gap-space-md py-space-xl">
             <span className="material-symbols-outlined text-[48px] text-outline-variant">lock_clock</span>
             <p className="font-body-md text-body-md text-on-surface-variant max-w-sm">
-              Document processing must be complete before you can ask questions.
+              {isMr
+                ? 'प्रश्नोत्तरे विचारण्यासाठी दस्तऐवज प्रक्रिया पूर्ण असणे आवश्यक आहे.'
+                : 'Document processing must be complete before you can ask questions.'}
             </p>
           </div>
         ) : messages.length === 0 ? (
@@ -104,10 +120,12 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
             <span className="material-symbols-outlined text-[48px] text-outline-variant">forum</span>
             <div>
               <p className="font-title-md text-title-md text-on-surface font-semibold mb-space-xs">
-                Ask a question about this document
+                {isMr ? 'या दस्तऐवजाबद्दल प्रश्न विचारा' : 'Ask a question about this document'}
               </p>
               <p className="font-body-sm text-body-sm text-outline">
-                Get answers grounded in the original court text
+                {isMr
+                  ? 'मूळ न्यायालयाच्या आदेशावर आधारित उत्तरे मिळवा'
+                  : 'Get answers grounded in the original court text'}
               </p>
             </div>
             <div className="flex flex-col gap-space-xs w-full max-w-sm">
@@ -176,7 +194,13 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={
-              isReady ? 'Ask a question about this document…' : 'Document processing…'
+              !isReady
+                ? isMr
+                  ? 'दस्तऐवजावर प्रक्रिया सुरू आहे…'
+                  : 'Document processing…'
+                : isMr
+                ? 'दस्तऐवजाबद्दल प्रश्न विचारा… (मराठीत उत्तर मिळेल)'
+                : 'Ask a question about this document…'
             }
             disabled={!isReady || isLoading}
             className="flex-1 h-11 px-space-md bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors disabled:opacity-50"
@@ -192,7 +216,9 @@ export function ChatBox({ document: doc }: ChatBoxProps) {
           </button>
         </div>
         <p className="font-label-sm text-label-sm text-outline mt-space-xs">
-          Answers are strictly limited to this document&apos;s content
+          {isMr
+            ? 'उत्तरे केवळ या दस्तऐवजातील कायदेशीर माहितीवर आधारित आहेत'
+            : "Answers are strictly limited to this document's content"}
         </p>
       </div>
     </div>

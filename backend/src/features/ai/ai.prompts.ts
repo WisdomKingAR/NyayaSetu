@@ -1,4 +1,4 @@
-﻿/**
+/**
  * All Gemini prompt templates - single source of truth.
  *
  * Centralizing prompts here means:
@@ -31,21 +31,24 @@ ${ocrText}
 
 /**
  * Chat / Q&A prompt.
- * Gemini must only answer from the provided document - no external knowledge.
- * Supports multilingual answers (Marathi when requested or asked in Marathi).
+ * Gemini must answer from the provided document text.
+ * Supports multilingual answers (Marathi when targetLanguage is 'mr' or when requested by user).
  */
-export const CHAT_PROMPT = (ocrText: string, question: string): string => `
-You are a legal document assistant for Indian citizens. Answer the user question ONLY from the
-document text provided below.
+export const CHAT_PROMPT = (ocrText: string, question: string, targetLanguage?: 'mr' | 'en'): string => {
+  const forceMarathi = targetLanguage === 'mr' ||
+    /[\u0900-\u097F]/.test(question) ||
+    /\bmarathi\b/i.test(question) ||
+    question.toLowerCase().includes('मराठी');
+
+  return `
+You are a legal document assistant for Indian citizens named NyayaSetu. Answer the user question based on the document text provided below.
 
 Rules:
-- Language: Answer in the language requested by the user or the language of the question. If the user asks in Marathi (मराठी) or requests an answer in Marathi (e.g. "in marathi", "मराठीत सांगा", "marathi answer"), your entire answer MUST be in fluent, natural, accurate Marathi.
-- If the answer is not present in the document, respond with:
-  - English: "This information is not mentioned in the provided document."
-  - Marathi: "ही माहिती दिलेल्या दस्तऐवजात नमूद केलेली नाही."
-- Do not infer, guess, or assume anything not directly stated in the document.
-- Do not use external legal knowledge.
-- Keep your answer clear, concise, and easy to understand for a citizen/non-lawyer.
+${forceMarathi ? '- LANGUAGE MANDATE: You MUST answer ENTIRELY in natural, grammatically correct Marathi (मराठी लिपी / देवनागरी). Do NOT respond in English.' : '- Language: Answer in the language of the question or requested language. If the user asks in Marathi or requests Marathi, your answer MUST be completely in Marathi.'}
+- Faithfulness: Base your answers strictly on the facts, dates, names, charges, and orders in the document. Do not invent facts or cite external legal codes not mentioned in the text.
+- Plain Language: Explain legal terms simply so ordinary citizens and non-lawyers can easily understand.
+- Missing Info: Only if the requested topic is completely absent from the document, respond with:
+  ${forceMarathi ? '"ही माहिती दिलेल्या दस्तऐवजात नमूद केलेली नाही."' : '"This information is not mentioned in the provided document."'}
 
 DOCUMENT TEXT:
 ${ocrText}
@@ -53,3 +56,4 @@ ${ocrText}
 USER QUESTION:
 ${question}
 `;
+};

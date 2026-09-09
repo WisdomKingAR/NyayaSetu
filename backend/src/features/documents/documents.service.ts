@@ -1,4 +1,4 @@
-﻿import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { supabaseAdmin } from '../../lib/supabaseAdmin';
 import { documentsRepository } from './documents.repository';
 import { ocrService } from '../ocr/ocr.service';
@@ -119,8 +119,13 @@ export const documentsService = {
 
   /**
    * Answers a user question grounded in the document's OCR text.
+   * Supports targetLanguage ('en' or 'mr') and ensures proper Marathi output.
    */
-  async chatWithDocument(id: string, question: string): Promise<string> {
+  async chatWithDocument(
+    id: string,
+    question: string,
+    targetLanguage?: 'mr' | 'en',
+  ): Promise<string> {
     const doc = await documentsRepository.findById(id);
     if (!doc) throw new NotFoundError('Document not found');
 
@@ -134,18 +139,26 @@ export const documentsService = {
       throw new DocumentNotReadyError('Document has no OCR text. Processing may have failed.');
     }
 
-    const answer = await aiService.chat(doc.ocrText, question);
-
-    // If user requested Marathi or asked in Marathi, ensure response is in Marathi
+    // Determine if Marathi is requested either explicitly via targetLanguage,
+    // or implicitly by Devanagari characters in question or the word "marathi"
     const isMarathiRequested =
+      targetLanguage === 'mr' ||
       /[\u0900-\u097F]/.test(question) ||
       /\bmarathi\b/i.test(question) ||
       question.toLowerCase().includes('मराठी');
 
+    const answer = await aiService.chat(
+      doc.ocrText,
+      question,
+      isMarathiRequested ? 'mr' : 'en',
+    );
+
     if (isMarathiRequested) {
-      // Check if the generated answer is mostly English (fewer than 10 Devanagari characters)
       const devanagariCount = (answer.match(/[\u0900-\u097F]/g) || []).length;
-      if (devanagariCount < 10) {
+      const latinCount = (answer.match(/[a-zA-Z]/g) || []).length;
+
+      // If the answer contains predominantly English text, translate it to Marathi
+      if (devanagariCount < 15 || latinCount > devanagariCount) {
         try {
           const translated = await translationService.translate(answer, 'en-IN', 'mr-IN');
           if (translated && translated.trim().length > 0) {

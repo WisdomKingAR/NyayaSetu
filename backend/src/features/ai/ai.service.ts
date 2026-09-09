@@ -1,4 +1,4 @@
-﻿import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { config } from '../../config';
 import { EXTRACTION_PROMPT, CHAT_PROMPT } from './ai.prompts';
 import type { ExtractionResult } from './ai.types';
@@ -7,21 +7,31 @@ const genAI = new GoogleGenerativeAI(config.gemini.apiKey);
 
 /**
  * Generates content using the configured model with automatic fallback to alternate models
- * if a specific model experiences a temporary Google Cloud capacity spike (503).
+ * if a specific model experiences a temporary quota limit (429) or capacity spike (503).
  */
-async function generateWithFallback(prompt: string): Promise<string> {
-  const candidateModels = [config.gemini.model, 'gemini-3.5-flash', 'gemini-3.6-flash', 'gemini-flash-latest'];
-  const uniqueModels = [...new Set(candidateModels)];
+export async function generateWithFallback(
+  prompt: string | Array<string | { inlineData: { data: string; mimeType: string } }>,
+): Promise<string> {
+  const candidateModels = [
+    config.gemini.model,
+    'gemini-3.1-flash-lite',
+    'gemini-3.5-flash-lite',
+    'gemini-3.7-flash',
+    'gemini-flash-latest',
+    'gemini-3.5-flash',
+  ];
+  const uniqueModels = [...new Set(candidateModels.filter(Boolean))];
 
   let lastError: unknown;
   for (const modelName of uniqueModels) {
     try {
       const model = genAI.getGenerativeModel({ model: modelName });
-      const result = await model.generateContent(prompt);
+      const result = await model.generateContent(prompt as any);
       return result.response.text().trim();
-    } catch (err) {
+    } catch (err: unknown) {
       lastError = err;
-      console.warn(`[aiService] Model ${modelName} failed, trying fallback model...`);
+      const status = (err as any)?.status || (err as Error)?.message?.slice(0, 100);
+      console.warn(`[aiService] Model ${modelName} failed (${status}), trying next candidate...`);
     }
   }
   throw lastError || new Error('All Gemini models failed');
@@ -76,7 +86,7 @@ export const aiService = {
    * This is context-stuffing (not RAG) - full OCR text goes into the prompt.
    * No vector DB or embeddings are used (out of scope per PRD).
    */
-  async chat(ocrText: string, question: string): Promise<string> {
-    return generateWithFallback(CHAT_PROMPT(ocrText, question));
+  async chat(ocrText: string, question: string, targetLanguage?: 'mr' | 'en'): Promise<string> {
+    return generateWithFallback(CHAT_PROMPT(ocrText, question, targetLanguage));
   },
 };
