@@ -12,7 +12,9 @@ export function DocumentCard({ document }: DocumentCardProps) {
       ? 'gavel'
       : 'description';
 
-  const formattedDate = new Date(document.uploadDate).toLocaleDateString('en-IN', {
+  const formattedDate = new Date(
+    document.uploadDate || document.created_at || Date.now(),
+  ).toLocaleDateString('en-IN', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -29,15 +31,15 @@ export function DocumentCard({ document }: DocumentCardProps) {
         <div className="flex flex-col min-w-0">
           <div className="flex items-center gap-space-sm flex-wrap">
             <span className="font-title-md text-title-md font-semibold text-on-surface truncate">
-              {document.filename}
+              {document.filename || document.original_filename || 'Document'}
             </span>
 
             <StatusBadge
               status={document.status}
-              isHandwritten={document.isHandwritten}
+              isHandwritten={document.isHandwritten || document.is_handwritten}
             />
 
-            {document.isHandwritten && document.status !== 'error' && (
+            {(document.isHandwritten || document.is_handwritten) && document.status !== 'error' && (
               <StatusBadge status="complete" isHandwritten className="hidden sm:inline-flex" />
             )}
           </div>
