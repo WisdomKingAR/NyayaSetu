@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: nyayasetu-backend
+    runtime: node
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Set secret variables in Render Dashboard:
+      # - SUPABASE_URL
+      # - SUPABASE_SERVICE_ROLE_KEY
+      # - SUPABASE_ANON_KEY
+      # - DATABASE_URL
+      # - GEMINI_API_KEY
+      # - SARVAM_API_KEY
+      # - FRONTEND_URL
