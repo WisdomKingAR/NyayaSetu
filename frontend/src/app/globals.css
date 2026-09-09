@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafaf7;
+    color: #1a1c1b;
+    overscroll-behavior: none;
+  }
+
+  body {
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Devanagari text */
+  [lang="mr"],
+  .font-devanagari {
+    font-family: 'Noto Sans Devanagari', 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  /* Hide scrollbar while preserving scroll functionality */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  /* ─── Signature card — used on every screen ─── */
+  .card {
+    @apply bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-lg;
+  }
+
+  /* ─── Material Symbols icon base ─── */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+    user-select: none;
+  }
+
+  /* ─── Status badges ─── */
+  .badge {
+    @apply inline-flex items-center px-space-xs py-space-xxs rounded font-label-sm text-label-sm font-semibold uppercase tracking-wider border;
+  }
+  .badge-ready {
+    @apply bg-[#EDF7F1] text-[#1B6B3A] border-[#1B6B3A];
+  }
+  .badge-processing {
+    @apply bg-[#FFF8DC] text-[#7A5C00] border-secondary;
+  }
+  .badge-error {
+    @apply bg-[#FDF0F0] text-[#8B1A1A] border-[#8B1A1A];
+  }
+  .badge-handwritten {
+    @apply bg-secondary-fixed text-[#7A5C00] border-secondary;
+  }
+  .badge-pending {
+    @apply bg-surface-container text-outline border-outline-variant;
+  }
+
+  /* ─── Primary button ─── */
+  .btn-primary {
+    @apply bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-wider font-semibold rounded-lg
+           hover:bg-primary active:bg-primary transition-colors
+           inline-flex items-center justify-center gap-space-xs
+           focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+  }
+
+  /* ─── Outline button ─── */
+  .btn-outline {
+    @apply bg-surface-container-lowest text-primary-container font-label-lg text-label-lg font-semibold rounded-lg
+           border border-primary-container
+           hover:bg-surface-container-low transition-colors
+           inline-flex items-center justify-center gap-space-xs;
+  }
+
+  /* ─── Form input ─── */
+  .form-input {
+    @apply w-full h-12 px-space-md bg-surface-container-lowest border border-outline-variant rounded-lg
+           font-body-md text-body-md text-on-surface placeholder:text-outline
+           focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container
+           transition-colors;
+  }
+
+  /* ─── Section label (eyebrow text) ─── */
+  .section-eyebrow {
+    @apply font-label-sm text-label-sm uppercase font-bold text-primary-container tracking-wider;
+  }
+
+  /* ─── OCR text display ─── */
+  .ocr-text {
+    @apply bg-surface-container-low border border-outline-variant rounded-lg
+           font-code-md text-code-md text-on-surface
+           p-space-lg whitespace-pre-wrap overflow-y-auto;
+    max-height: 400px;
+    line-height: 1.9;
+  }
+}

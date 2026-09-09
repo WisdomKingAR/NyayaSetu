@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;background-color:#FAFAF7;color:#1A1C1B;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#ffffff", "secondary-fixed": "#ffe08e", "on-tertiary-fixed-variant": "#464747", "on-primary-fixed": "#001a40", "error": "#ba1a1a", "primary-fixed-dim": "#acc7ff", "tertiary-fixed": "#e4e2e2", "outline-variant": "#c4c6d0", "surface-container-high": "#e8e8e5", "on-tertiary-container": "#a6a5a5", "on-tertiary-fixed": "#1b1c1c", "on-background": "#1a1c1b", "on-primary-container": "#89a5dd", "surface-container-low": "#f4f4f1", "on-secondary-container": "#735a00", "surface-container-highest": "#e2e3e0", "secondary": "#755b00", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#c7c6c6", "secondary-container": "#fed255", "inverse-on-surface": "#f1f1ee", "surface-container": "#eeeeeb", "primary-fixed": "#d7e2ff", "inverse-primary": "#acc7ff", "primary-container": "#1b3a6b", "on-secondary-fixed-variant": "#584400", "surface-tint": "#425e91", "surface": "#fafaf7", "on-surface": "#1a1c1b", "on-primary-fixed-variant": "#294678", "background": "#fafaf7", "on-surface-variant": "#44474f", "outline": "#747780", "on-secondary-fixed": "#241a00", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-error": "#ffffff", "tertiary": "#252525", "surface-dim": "#dadad7", "primary": "#002452", "tertiary-container": "#3a3b3b", "surface-variant": "#e2e3e0", "inverse-surface": "#2f312f", "secondary-fixed-dim": "#ecc246", "surface-bright": "#fafaf7" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-desktop": "1.5rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-3xl": "4rem", "space-md": "1rem", "space-xxs": "0.125rem", "max-container": "75rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "body-sm": [ "IBM Plex Sans", "sans-serif" ], "code-md": [ "IBM Plex Mono", "monospace" ], "label-sm": [ "IBM Plex Sans", "sans-serif" ], "headline-md": [ "Spectral", "serif" ], "label-lg": [ "IBM Plex Sans", "sans-serif" ], "display-lg": [ "Spectral", "serif" ], "headline-lg": [ "Spectral", "serif" ], "title-lg": [ "IBM Plex Sans", "sans-serif" ], "body-lg": [ "IBM Plex Sans", "sans-serif" ], "label-md": [ "IBM Plex Sans", "sans-serif" ], "headline-lg-mobile": [ "Spectral", "serif" ], "title-md": [ "IBM Plex Sans", "sans-serif" ], "display-lg-mobile": [ "Spectral", "serif" ], "body-md": [ "IBM Plex Sans", "sans-serif" ], "headline-sm": [ "Spectral", "serif" ] }, "fontSize": { "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "code-md": [ "13px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "display-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "title-lg": [ "18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "600" } ], "display-lg-mobile": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant h-16"><div class="w-full px-gutter-mobile lg:px-gutter-desktop h-16 flex items-center justify-between"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm" data-path="landing" href="#"><span class="font-headline-md text-headline-md font-bold text-primary-container tracking-tight">NyayaSetu</span><div class="h-4 w-px bg-outline-variant hidden sm:block"></div><span class="hidden sm:inline-block font-body-sm text-body-sm text-outline font-normal">न्यायसेतु — Understand Your Court Case</span></a></div><div class="flex items-center gap-space-md"><div class="flex items-center border border-outline-variant rounded px-space-xs py-0.5 text-label-sm font-label-sm text-on-surface-variant bg-surface-container-low"><button class="px-space-xs font-semibold text-primary-container" type="button">EN</button><span class="text-outline-variant">|</span><button class="px-space-xs text-outline hover:text-on-surface transition-colors" type="button">मराठी</button></div><a class="bg-primary-container text-on-primary font-label-lg text-label-lg px-space-md py-space-xs rounded hover:bg-primary transition-colors inline-flex items-center justify-center" data-path="upload-interaction-states" href="#">Upload Docket</a><div class="flex items-center gap-space-xs pl-space-sm border-l border-outline-variant"><div class="w-8 h-8 rounded bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary-container font-title-md text-title-md">AS</div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Adv. S. Sharma</span><span class="font-label-sm text-label-sm text-outline">Bar Council #MH/8492</span></div><a class="ml-space-xs font-label-sm text-label-sm text-outline hover:text-primary-container transition-colors" data-path="role-picker" href="#">Switch</a></div></div></div></header><div class="flex flex-1 pt-16"><aside class="w-64 fixed top-16 bottom-0 left-0 bg-surface-container-lowest border-r border-outline-variant overflow-y-auto hidden md:flex flex-col justify-between p-space-md"><div class="flex flex-col gap-space-lg"><div><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block mb-space-xs">Dockets &amp; Portals</span><nav class="flex flex-col gap-space-xs" data-active-classes="text-primary-container font-title-md bg-surface-container-low border-l-4 border-primary-container pl-space-sm"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="advocate-dashboard" href="#">Case Files (Advocate)</a><a aria-current="page" class="transition-colors py-space-xs px-space-xs rounded text-primary-container font-title-md bg-surface-container-low border-l-4 border-primary-container pl-space-sm" data-path="litigant-dashboard" href="#">My Case (Litigant)</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="cause-list" href="#">Cause List Docket</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="upload-interaction-states" href="#">Batch Processing</a></nav></div><div><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block mb-space-xs">Case Records</span><nav class="flex flex-col gap-space-xs" data-active-classes="text-primary-container font-title-md bg-surface-container-low border-l-4 border-primary-container pl-space-sm"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="document-detail-advocate-view" href="#">Document (Advocate)</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="document-detail-litigant-view" href="#">Document (Litigant)</a></nav></div></div><div class="border-t border-outline-variant pt-space-md flex flex-col gap-space-xs"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container transition-colors py-space-xs" data-path="role-picker" href="#">Change Access Role</a><a class="font-label-sm text-label-sm text-error hover:underline py-space-xs" data-path="log-in" href="#">End Session (Log Out)</a></div></aside><main class="flex-1 bg-surface md:pl-64 min-w-0"><div class="flex flex-col w-full">
+<!-- Litigant Dashboard Container -->
+<div class="w-full max-w-[75rem] mx-auto px-gutter-mobile lg:px-gutter-desktop py-space-xl flex flex-col gap-space-xl">
+<!-- 1. Header Greeting Block -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-space-md border-b border-outline-variant pb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-md text-code-md text-outline tracking-wider uppercase">Docket #MH-PU-2023-009412</span>
+<span class="w-1.5 h-1.5 bg-outline-variant rounded-full"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">Civil Suit Active</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">Hello, Meenakshi</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Here's where your case stands in Pune District Court.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-11 px-space-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold rounded hover:bg-primary transition-colors flex items-center justify-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+<span>Upload a New Document</span>
+</button>
+</div>
+</section>
+<!-- 2. CENTERPIECE: Next Hearing Card -->
+<section class="w-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg lg:p-space-2xl">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-space-md pb-space-md border-b border-outline-variant">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase font-semibold">YOUR NEXT HEARING</span>
+</div>
+<div class="px-space-sm py-space-xxs bg-surface-container text-primary-container font-code-md text-code-md rounded">
+          CNR: MHPUN010049282023
+        </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg pt-space-lg items-start">
+<div class="lg:col-span-8 flex flex-col gap-space-sm">
+<div class="flex flex-col">
+<span class="font-headline-lg text-[44px] lg:text-[52px] leading-[1.1] font-bold text-primary tracking-tight">18 April 2025</span>
+<span class="font-title-lg text-title-lg text-on-surface mt-space-xs font-semibold">
+              at Pune Civil Court, Court Hall No. 4 (Civil Judge Senior Division)
+            </span>
+</div>
+<div class="mt-space-md p-space-md bg-surface-container-low rounded border border-outline-variant flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary-container mt-0.5 text-[22px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary-container uppercase tracking-wide">Hearing Guidance</span>
+<p class="font-body-md text-body-md text-on-surface mt-0.5">
+                Next stage: Written submissions on interim injunction. Your personal appearance is dispensed with for this date. Your advocate Adv. S. Sharma will represent the docket.
+              </p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded border border-outline-variant">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Scheduled Order of Business</span>
+<div class="flex flex-col gap-space-xs text-body-sm font-body-sm text-on-surface">
+<div class="flex justify-between py-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Hearing Item:</span>
+<span class="font-semibold text-primary">Item #14 (Morning Session)</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Presiding:</span>
+<span class="font-semibold">Hon. Civil Judge (Sr. Div)</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Estimated Call:</span>
+<span class="font-semibold">11:30 AM – 12:15 PM</span>
+</div>
+</div>
+<button class="mt-space-xs w-full py-2 bg-surface-container-lowest border border-outline text-primary-container text-label-md font-label-md rounded hover:bg-surface-container transition-colors flex items-center justify-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">notifications</span>
+<span>Set Hearing Reminder</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 3. Plain-Language Case Summary Card -->
+<section class="w-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-md border-b border-outline-variant">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">What's happened so far</h2>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Simplified judicial record summary updated after the 12 March sitting</p>
+</div>
+<!-- Language toggle for summary -->
+<div class="inline-flex items-center p-1 bg-surface-container border border-outline-variant rounded">
+<button class="px-space-sm py-1 rounded text-label-sm font-label-sm bg-primary-container text-on-primary transition-all" id="lang-en" onclick="setLanguage('en')" type="button">
+            English
+          </button>
+<button class="px-space-sm py-1 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="lang-mr" onclick="setLanguage('mr')" type="button">
+            मराठी (Marathi)
+          </button>
+</div>
+</div>
+<!-- Content panel: softly tinted well -->
+<div class="mt-space-md p-space-lg bg-surface-container-low rounded border border-outline-variant flex flex-col gap-space-md">
+<div class="flex flex-col gap-space-sm" id="summary-english">
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+            The civil court has continued the stay order protecting your land plot. The builder cannot sell or build on Survey No. 42/3 until the case is decided. The court has ordered the builder's lawyer to produce the original 1998 agreement.
+          </p>
+<div class="flex items-center gap-space-xs pt-space-xs text-body-sm font-body-sm text-outline">
+<span class="material-symbols-outlined text-[16px]">history_edu</span>
+<span>Based on Certified Copy Order Exh. 5 passed by Civil Court Senior Division, Pune</span>
+</div>
+</div>
+<div class="hidden flex-col gap-space-sm" id="summary-marathi">
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+            दिवाणी न्यायालयाने आपल्या जमिनीच्या भूखंडाचे संरक्षण करणारा अंतरिम स्थगिती आदेश कायम ठेवला आहे. अंतिम निकाल येईपर्यंत बांधकाम व्यावसायिक सर्व्हे क्र. ४२/३ मधील जागेची विक्री किंवा त्यावर कोणतेही बांधकाम करू शकत नाही. न्यायालयाने बांधकाम व्यावसायिकाच्या वकिलांना १९९८ चा मूळ नोंदणीकृत करारनामा प्रत्यक्ष न्यायालयात सादर करण्याचे आदेश दिले आहेत.
+          </p>
+<div class="flex items-center gap-space-xs pt-space-xs text-body-sm font-body-sm text-outline">
+<span class="material-symbols-outlined text-[16px]">history_edu</span>
+<span>पुणे वरिष्ठ स्तर दिवाणी न्यायालयाच्या आदेश पत्र क्र. ५ च्या आधारे प्रमाणित प्रत</span>
+</div>
+</div>
+<!-- Key Safeguards Ledger -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-sm border-t border-outline-variant">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Land Protection Status</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold mt-0.5">Stay In Place (Active)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Restricted Property</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold mt-0.5">Survey No. 42/3 (Plot B)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Opposing Party Duty</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold mt-0.5">Submit 1998 Original Deed</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. "Your Documents" Section -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-xs pb-space-xs">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Your Documents (3 uploaded)</h2>
+<p class="font-body-sm text-body-sm text-outline">Original papers translated into simple summaries for your review</p>
+</div>
+<span class="font-code-md text-code-md text-on-surface-variant">Last verified: 14 March 2025</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Document Row 1 -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-title-md text-title-md font-semibold text-on-surface">Court Order — Interim Injunction (12 March 2024)</span>
+<!-- Green Badge -->
+<span class="text-[11px] leading-[14px] font-semibold tracking-[0.03em] uppercase px-2 py-0.5 rounded-[2px] bg-[#EDF7F1] text-[#1B6B3A] border border-[#B7E2C6]">
+                  Ready to view
+                </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Civil Judge Court Hall 4 • 6 pages • Direct order restraining construction</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md self-end md:self-center shrink-0">
+<a class="h-10 px-space-md bg-surface-container-lowest border border-primary-container text-primary-container font-label-lg text-label-lg font-semibold rounded hover:bg-surface-container-low transition-colors inline-flex items-center justify-center gap-1" data-path="document-detail-litigant-view" href="#">
+<span>Read Summary</span>
+<span class="text-secondary font-bold">→</span>
+</a>
+</div>
+</div>
+<!-- Document Row 2 -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">description</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-title-md text-title-md font-semibold text-on-surface">Photocopy of 1998 Registered Agreement</span>
+<!-- Green Badge -->
+<span class="text-[11px] leading-[14px] font-semibold tracking-[0.03em] uppercase px-2 py-0.5 rounded-[2px] bg-[#EDF7F1] text-[#1B6B3A] border border-[#B7E2C6]">
+                  Ready to view
+                </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Haveli Sub-Registrar Office • 14 pages • Land boundary and signature records</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md self-end md:self-center shrink-0">
+<a class="h-10 px-space-md bg-surface-container-lowest border border-primary-container text-primary-container font-label-lg text-label-lg font-semibold rounded hover:bg-surface-container-low transition-colors inline-flex items-center justify-center gap-1" data-path="document-detail-litigant-view" href="#">
+<span>Read Summary</span>
+<span class="text-secondary font-bold">→</span>
+</a>
+</div>
+</div>
+<!-- Document Row 3 -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-outline shrink-0">
+<span class="material-symbols-outlined text-[24px]">edit_document</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-title-md text-title-md font-semibold text-on-surface">Handwritten Court Roznama Sheet (Marathi)</span>
+<!-- Amber Badge -->
+<span class="text-[11px] leading-[14px] font-semibold tracking-[0.03em] uppercase px-2 py-0.5 rounded-[2px] bg-[#FFF8DC] text-[#7A5C00] border border-[#ECD79A]">
+                  Still working on this
+                </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Uploaded today at 09:15 AM • 2 pages • Translating clerk script into clear reading notes</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md self-end md:self-center shrink-0">
+<button class="h-10 px-space-md bg-surface-container-low border border-outline-variant text-outline font-label-lg text-label-lg rounded cursor-not-allowed inline-flex items-center justify-center gap-1" disabled="" type="button">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>Checking details...</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. "Ask a Question" Banner Card -->
+<section class="w-full bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg lg:p-space-xl">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-xl">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-xs text-primary-container">
+<span class="material-symbols-outlined text-[22px]">forum</span>
+<span class="font-label-sm text-label-sm uppercase font-semibold tracking-wider">Direct Assistance</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Have a question about your case? Ask here.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Type in plain words like “Do I have to go to court on 18th?” or “What did judge decide about my land?” and get answers directly from your filed orders.
+          </p>
+<!-- Sample suggested questions pill row -->
+<div class="flex items-center gap-space-xs flex-wrap mt-space-sm">
+<span class="font-label-sm text-label-sm text-outline">Try asking:</span>
+<button class="text-body-sm font-body-sm bg-surface-container hover:bg-surface-container-high text-on-surface px-space-sm py-0.5 rounded border border-outline-variant transition-colors" onclick="fillQuestion('Do I need to be present on April 18?')" type="button">
+              “Do I need to be present on April 18?”
+            </button>
+<button class="text-body-sm font-body-sm bg-surface-container hover:bg-surface-container-high text-on-surface px-space-sm py-0.5 rounded border border-outline-variant transition-colors" onclick="fillQuestion('Can the builder touch my survey plot?')" type="button">
+              “Can the builder touch my survey plot?”
+            </button>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm w-full lg:w-96 shrink-0">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold" for="litigant-query">Your Question</label>
+<div class="relative">
+<input class="w-full h-11 px-space-sm bg-surface-container-lowest border border-outline-variant rounded text-on-surface font-body-md text-body-md focus:border-primary-container focus:outline-none" id="litigant-query" placeholder="Type question in Marathi or English..." type="text"/>
+</div>
+</div>
+<button class="h-11 px-space-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold rounded hover:bg-primary transition-colors flex items-center justify-center gap-space-xs w-full" onclick="submitQuery()" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Ask Questions About My Case</span>
+</button>
+<span class="text-center font-label-sm text-label-sm text-outline">Answers cited strictly from verified court orders</span>
+</div>
+</div>
+<!-- Interactive question response placeholder well (initially hidden) -->
+<div class="hidden mt-space-lg p-space-md bg-surface-container-low border border-outline-variant rounded flex flex-col gap-space-xs" id="query-result">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-xs">
+<span class="font-label-md text-label-md text-primary-container font-semibold uppercase">Answer from Order dated 12 March 2024 (Page 4, Para 7)</span>
+<button class="text-outline hover:text-on-surface text-label-sm font-label-sm" onclick="closeResponse()" type="button">Dismiss</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface pt-space-xs leading-relaxed" id="query-answer"></p>
+</div>
+</section>
+<!-- Support Help Footnote -->
+<div class="flex flex-col sm:flex-row items-center justify-between text-body-sm font-body-sm text-outline pt-space-xs pb-space-xl border-t border-outline-variant">
+<span>District &amp; Sessions Court, Pune • Shivajinagar Court Complex</span>
+<div class="flex items-center gap-space-md mt-space-xs sm:mt-0">
+<a class="hover:text-primary-container transition-colors" href="#">Download Case Passbook</a>
+<span>•</span>
+<a class="hover:text-primary-container transition-colors" href="#">Contact Adv. Sharma's Chamber</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function setLanguage(lang) {
+    var enDiv = document.getElementById('summary-english');
+    var mrDiv = document.getElementById('summary-marathi');
+    var btnEn = document.getElementById('lang-en');
+    var btnMr = document.getElementById('lang-mr');
+
+    if (!enDiv || !mrDiv || !btnEn || !btnMr) return;
+
+    if (lang === 'mr') {
+      enDiv.classList.add('hidden');
+      mrDiv.classList.remove('hidden');
+      mrDiv.classList.add('flex');
+
+      btnMr.className = 'px-space-sm py-1 rounded text-label-sm font-label-sm bg-primary-container text-on-primary transition-all';
+      btnEn.className = 'px-space-sm py-1 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all';
+    } else {
+      mrDiv.classList.add('hidden');
+      enDiv.classList.remove('hidden');
+      enDiv.classList.add('flex');
+
+      btnEn.className = 'px-space-sm py-1 rounded text-label-sm font-label-sm bg-primary-container text-on-primary transition-all';
+      btnMr.className = 'px-space-sm py-1 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all';
+    }
+  }
+
+  function fillQuestion(text) {
+    var input = document.getElementById('litigant-query');
+    if (input) {
+      input.value = text;
+      input.focus();
+    }
+  }
+
+  function submitQuery() {
+    var input = document.getElementById('litigant-query');
+    var resBox = document.getElementById('query-result');
+    var resText = document.getElementById('query-answer');
+
+    if (!input || !resBox || !resText) return;
+
+    var val = input.value.trim();
+    if (!val) {
+      input.focus();
+      return;
+    }
+
+    resBox.classList.remove('hidden');
+    if (val.toLowerCase().includes('present') || val.toLowerCase().includes('18')) {
+      resText.textContent = "No, you do not need to attend court in person on 18 April 2025. The Hon'ble Judge recorded that only written legal arguments are being filed by your advocate. Your presence is formally excused.";
+    } else {
+      resText.textContent = "The order confirms the status-quo: the builder cannot construct or create third-party rights on Survey No. 42/3. Any physical work on your plot without court permission violates the injunction order.";
+    }
+  }
+
+  function closeResponse() {
+    var resBox = document.getElementById('query-result');
+    if (resBox) resBox.classList.add('hidden');
+  }
+</script></main></div></body></html>

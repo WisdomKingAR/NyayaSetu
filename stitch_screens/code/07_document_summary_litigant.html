@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;background-color:#FAFAF7;color:#1A1C1B;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#ffffff", "secondary-fixed": "#ffe08e", "on-tertiary-fixed-variant": "#464747", "on-primary-fixed": "#001a40", "error": "#ba1a1a", "primary-fixed-dim": "#acc7ff", "tertiary-fixed": "#e4e2e2", "outline-variant": "#c4c6d0", "surface-container-high": "#e8e8e5", "on-tertiary-container": "#a6a5a5", "on-tertiary-fixed": "#1b1c1c", "on-background": "#1a1c1b", "on-primary-container": "#89a5dd", "surface-container-low": "#f4f4f1", "on-secondary-container": "#735a00", "surface-container-highest": "#e2e3e0", "secondary": "#755b00", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#c7c6c6", "secondary-container": "#fed255", "inverse-on-surface": "#f1f1ee", "surface-container": "#eeeeeb", "primary-fixed": "#d7e2ff", "inverse-primary": "#acc7ff", "primary-container": "#1b3a6b", "on-secondary-fixed-variant": "#584400", "surface-tint": "#425e91", "surface": "#fafaf7", "on-surface": "#1a1c1b", "on-primary-fixed-variant": "#294678", "background": "#fafaf7", "on-surface-variant": "#44474f", "outline": "#747780", "on-secondary-fixed": "#241a00", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-error": "#ffffff", "tertiary": "#252525", "surface-dim": "#dadad7", "primary": "#002452", "tertiary-container": "#3a3b3b", "surface-variant": "#e2e3e0", "inverse-surface": "#2f312f", "secondary-fixed-dim": "#ecc246", "surface-bright": "#fafaf7" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-desktop": "1.5rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-3xl": "4rem", "space-md": "1rem", "space-xxs": "0.125rem", "max-container": "75rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "body-sm": [ "IBM Plex Sans", "sans-serif" ], "code-md": [ "IBM Plex Mono", "monospace" ], "label-sm": [ "IBM Plex Sans", "sans-serif" ], "headline-md": [ "Spectral", "serif" ], "label-lg": [ "IBM Plex Sans", "sans-serif" ], "display-lg": [ "Spectral", "serif" ], "headline-lg": [ "Spectral", "serif" ], "title-lg": [ "IBM Plex Sans", "sans-serif" ], "body-lg": [ "IBM Plex Sans", "sans-serif" ], "label-md": [ "IBM Plex Sans", "sans-serif" ], "headline-lg-mobile": [ "Spectral", "serif" ], "title-md": [ "IBM Plex Sans", "sans-serif" ], "display-lg-mobile": [ "Spectral", "serif" ], "body-md": [ "IBM Plex Sans", "sans-serif" ], "headline-sm": [ "Spectral", "serif" ] }, "fontSize": { "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "code-md": [ "13px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "display-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "title-lg": [ "18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "600" } ], "display-lg-mobile": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant h-16"><div class="w-full px-gutter-mobile lg:px-gutter-desktop h-16 flex items-center justify-between"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm" data-path="landing" href="#"><span class="font-headline-md text-headline-md font-bold text-primary-container tracking-tight">NyayaSetu</span><div class="h-4 w-px bg-outline-variant hidden sm:block"></div><span class="hidden sm:inline-block font-body-sm text-body-sm text-outline font-normal">न्यायसेतु — Understand Your Court Case</span></a></div><div class="flex items-center gap-space-md"><div class="flex items-center border border-outline-variant rounded px-space-xs py-0.5 text-label-sm font-label-sm text-on-surface-variant bg-surface-container-low"><button class="px-space-xs font-semibold text-primary-container" type="button">EN</button><span class="text-outline-variant">|</span><button class="px-space-xs text-outline hover:text-on-surface transition-colors" type="button">मराठी</button></div><a class="bg-primary-container text-on-primary font-label-lg text-label-lg px-space-md py-space-xs rounded hover:bg-primary transition-colors inline-flex items-center justify-center" data-path="upload-interaction-states" href="#">Upload Docket</a><div class="flex items-center gap-space-xs pl-space-sm border-l border-outline-variant"><div class="w-8 h-8 rounded bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary-container font-title-md text-title-md">AS</div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Adv. S. Sharma</span><span class="font-label-sm text-label-sm text-outline">Bar Council #MH/8492</span></div><a class="ml-space-xs font-label-sm text-label-sm text-outline hover:text-primary-container transition-colors" data-path="role-picker" href="#">Switch</a></div></div></div></header><div class="flex flex-1 pt-16"><aside class="w-64 fixed top-16 bottom-0 left-0 bg-surface-container-lowest border-r border-outline-variant overflow-y-auto hidden md:flex flex-col justify-between p-space-md"><div class="flex flex-col gap-space-lg"><div><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block mb-space-xs">Dockets &amp; Portals</span><nav class="flex flex-col gap-space-xs" data-active-classes="text-primary-container font-title-md bg-surface-container-low border-l-4 border-primary-container pl-space-sm"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="advocate-dashboard" href="#">Case Files (Advocate)</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="litigant-dashboard" href="#">My Case (Litigant)</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="cause-list" href="#">Cause List Docket</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="upload-interaction-states" href="#">Batch Processing</a></nav></div><div><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block mb-space-xs">Case Records</span><nav class="flex flex-col gap-space-xs" data-active-classes="text-primary-container font-title-md bg-surface-container-low border-l-4 border-primary-container pl-space-sm"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="document-detail-advocate-view" href="#">Document (Advocate)</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs rounded" data-path="document-detail-litigant-view" href="#">Document (Litigant)</a></nav></div></div><div class="border-t border-outline-variant pt-space-md flex flex-col gap-space-xs"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container transition-colors py-space-xs" data-path="role-picker" href="#">Change Access Role</a><a class="font-label-sm text-label-sm text-error hover:underline py-space-xs" data-path="log-in" href="#">End Session (Log Out)</a></div></aside><main class="flex-1 bg-surface md:pl-64 min-w-0"><div class="flex flex-col w-full">
+<div class="max-w-[75rem] mx-auto w-full px-gutter-mobile lg:px-gutter-desktop py-space-xl space-y-space-xl">
+<!-- 1. Top navigation link -->
+<div class="flex items-center justify-between">
+<a class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary-container hover:text-primary transition-colors" data-path="litigant-dashboard" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to My Case</span>
+</a>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[16px] text-outline">verified</span>
+<span>Court Record Verified • 12 Mar 2024</span>
+</div>
+</div>
+<!-- 2. Document Title Header & Language Toggle -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-md border-b border-outline-variant">
+<div class="space-y-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm rounded-[2px]">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span>Interim Injunction Order</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Court Order — 12 March 2024</h1>
+<p class="font-body-md text-body-md text-outline">Certified court order copy from Civil Suit No. 418 of 2024</p>
+</div>
+<!-- Segmented Language Control -->
+<div class="inline-flex items-center p-1 bg-surface-container-high rounded-[4px] border border-outline-variant self-start md:self-auto">
+<button class="px-space-md py-1 font-label-md text-label-md rounded-[2px] bg-primary-container text-on-primary font-semibold transition-all" id="lang-btn-en" onclick="setLanguage('en')" type="button">
+          English
+        </button>
+<button class="px-space-md py-1 font-label-md text-label-md rounded-[2px] text-on-surface-variant hover:text-on-surface transition-all" id="lang-btn-mr" onclick="setLanguage('mr')" type="button">
+          मराठी
+        </button>
+</div>
+</div>
+<!-- 3. Large "Next Hearing" Highlight Block -->
+<section class="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block font-semibold" id="label-hearing-title">
+            YOUR NEXT HEARING DATE
+          </span>
+<div class="flex items-baseline gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg font-bold text-primary-container tracking-tight">
+              18 April 2025
+            </span>
+<span class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm rounded-[2px] font-medium">
+              Hall No. 4 • 10:30 AM
+            </span>
+</div>
+<div class="flex items-start gap-space-xs pt-space-xs max-w-2xl">
+<span class="material-symbols-outlined text-[18px] text-primary-container mt-0.5 shrink-0">info</span>
+<p class="font-body-md text-body-md text-on-surface leading-normal" id="label-hearing-note">
+<strong>You do not need to attend this hearing in person.</strong> The advocates will present written papers to the judge.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-start lg:self-center shrink-0">
+<button class="min-h-[44px] px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container-high text-primary-container font-label-lg text-label-lg rounded-[4px] border border-outline-variant inline-flex items-center gap-space-xs transition-colors" onclick="copyHearingReminder()" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_add_on</span>
+<span id="btn-calendar-text">Add to Calendar</span>
+</button>
+<a class="min-h-[44px] px-space-md py-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg rounded-[4px] inline-flex items-center gap-space-xs transition-colors" href="tel:02025530000">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span>Contact Lawyer</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 4. "What this document says" Card -->
+<section class="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg space-y-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary-container">format_quote</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="section-summary-title">
+            What this document says
+          </h2>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1" id="section-summary-subtitle">
+          Plain English summary of the 14-page court order issued by the Civil Judge
+        </p>
+</div>
+<!-- Tinted Summary Container -->
+<div class="bg-surface-container-high/60 border border-outline-variant p-space-lg rounded-[4px] space-y-space-md">
+<div class="flex items-start gap-space-sm" id="point-1">
+<span class="flex items-center justify-center w-6 h-6 rounded-[2px] bg-primary-container text-on-primary font-code-md text-code-md font-bold shrink-0 mt-0.5">
+            1
+          </span>
+<div class="space-y-0.5">
+<h3 class="font-title-md text-title-md text-on-surface">The stay on your property remains active</h3>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed text-slate-800">
+              The builder cannot start construction or sell any plots on <strong>Survey No. 42/3</strong> until the final verdict. Your peaceful possession is officially protected by court order.
+            </p>
+</div>
+</div>
+<div class="h-px bg-outline-variant"></div>
+<div class="flex items-start gap-space-sm" id="point-2">
+<span class="flex items-center justify-center w-6 h-6 rounded-[2px] bg-primary-container text-on-primary font-code-md text-code-md font-bold shrink-0 mt-0.5">
+            2
+          </span>
+<div class="space-y-0.5">
+<h3 class="font-title-md text-title-md text-on-surface">Builder instructed to produce the original 1998 deed</h3>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed text-slate-800">
+              The builder's lawyer must bring the original 1998 registered land agreement to court on the next date for direct inspection by the judge.
+            </p>
+</div>
+</div>
+<div class="h-px bg-outline-variant"></div>
+<div class="flex items-start gap-space-sm" id="point-3">
+<span class="flex items-center justify-center w-6 h-6 rounded-[2px] bg-primary-container text-on-primary font-code-md text-code-md font-bold shrink-0 mt-0.5">
+            3
+          </span>
+<div class="space-y-0.5">
+<h3 class="font-title-md text-title-md text-on-surface">Status quo on the ground</h3>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed text-slate-800">
+              Both parties are directed to maintain the status of the land as it exists today. Neither side may alter boundaries or erect fencing.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Labeled Facts 2-Column Grid -->
+<section class="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg space-y-space-md">
+<div class="border-b border-outline-variant pb-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Key Facts of This File</h2>
+<p class="font-body-sm text-body-sm text-outline">Basic reference points recorded with the Registrar</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-space-xl gap-y-space-md">
+<!-- Fact 1 -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded-[4px] space-y-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">Case Reference</span>
+<p class="font-title-md text-title-md text-on-surface">Civil Suit No. 418 of 2024</p>
+<p class="font-code-md text-code-md text-primary-container bg-surface-container-lowest px-2 py-0.5 border border-outline-variant rounded-[2px] inline-block">
+            CNR: MHP002-004189-2024
+          </p>
+</div>
+<!-- Fact 2 -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded-[4px] space-y-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">Court &amp; Chamber</span>
+<p class="font-title-md text-title-md text-on-surface">Pune Civil Court (Senior Division)</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Hall No. 4 • Coram: Hon. S. K. Kulkarni</p>
+</div>
+<!-- Fact 3 -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded-[4px] space-y-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">Who Is Involved</span>
+<div class="font-body-md text-body-md space-y-0.5">
+<p><span class="font-semibold text-on-surface">Plaintiff:</span> Smt. Meenakshi Deshpande</p>
+<p><span class="font-semibold text-on-surface">Defendant:</span> M/s Sahyadri Land Promoters LLP</p>
+</div>
+</div>
+<!-- Fact 4 -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded-[4px] space-y-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">Next Scheduled Stage</span>
+<p class="font-title-md text-title-md text-on-surface">18 April 2025</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Filing of Written Arguments &amp; Original Deeds</p>
+</div>
+</div>
+</section>
+<!-- 6. Collapsible Raw Scanned Court Text -->
+<section class="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] overflow-hidden">
+<button aria-controls="raw-text-content" aria-expanded="false" class="w-full text-left p-space-md flex items-center justify-between hover:bg-surface-container-low transition-colors select-none" id="raw-text-toggle" onclick="toggleRawSection()" type="button">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-primary-container transition-transform" id="raw-toggle-arrow">chevron_right</span>
+<div>
+<span class="font-title-md text-title-md text-on-surface block">See the Original Scanned Document Text</span>
+<span class="font-body-sm text-body-sm text-outline">Click to view raw court record as typed in the judicial registry</span>
+</div>
+</div>
+<span class="font-code-md text-code-md text-outline hidden sm:inline-block">ORDER_EXHIBIT_5.TXT</span>
+</button>
+<div class="hidden border-t border-outline-variant bg-surface-container-low p-space-md" id="raw-text-content">
+<div class="flex items-center justify-between mb-space-xs text-outline font-label-sm text-label-sm">
+<span>COURT OF CIVIL JUDGE, SENIOR DIVISION, PUNE</span>
+<span>DATE OF ORDER: 12-03-2024</span>
+</div>
+<pre class="font-code-md text-code-md bg-surface-container-lowest p-space-md rounded-[2px] border border-outline-variant overflow-x-auto text-on-surface whitespace-pre-wrap leading-relaxed">IN THE COURT OF 4TH JOINT CIVIL JUDGE SENIOR DIVISION, PUNE
+CIVIL SUIT NO. 418 OF 2024
+CNR NO: MHP002-004189-2024
+
+Smt. Meenakshi Prabhakar Deshpande             ... Plaintiff
+                  Versus
+M/s Sahyadri Land Promoters LLP &amp; Ors.         ... Defendants
+
+ORDER BELOW EXHIBIT 5:
+1. Heard the learned counsel for the Plaintiff and the learned counsel for the Defendants.
+2. Perused the records, prima facie case is made out regarding registered ownership entry in respect of Gat No. 42/3 of Village Baner.
+3. The ad-interim injunction granted earlier vide order dated 14-01-2024 is hereby extended until further orders.
+4. The Defendants are hereby restrained by themselves, their agents, servants or any person claiming through them from carrying out any construction, alienation, creating third party rights or altering the physical boundaries of the suit property.
+5. Defendant No. 1 is strictly directed to bring and file the original Title Deed dated 12-08-1998 on or before the next date without fail.
+6. Both parties to maintain status-quo as on today.
+7. Matter is posted for filing of Defendant's written say and compliance of direction No. 5 on 18-04-2025.
+
+Dictated and pronounced in open court.
+Sd/-
+(S. K. Kulkarni)
+Civil Judge Senior Division, Hall 4, Pune
+        </pre>
+</div>
+</section>
+<!-- 7. Friendly "Ask a Question" Chat Box -->
+<section class="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container rounded-[6px] p-space-lg space-y-space-md">
+<div class="border-b border-outline-variant pb-space-sm flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-[4px] bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="chat-heading">
+            Have a question? Ask in plain words.
+          </h2>
+<p class="font-body-md text-body-md text-outline" id="chat-subtext">
+            Answers come only from this document, so they're accurate to your case.
+          </p>
+</div>
+</div>
+<!-- Quick Question Chips -->
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm text-outline block">Quick examples you can tap:</span>
+<div class="flex flex-wrap gap-space-xs">
+<button class="px-space-sm py-1.5 bg-surface-container-low hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm rounded-[4px] border border-outline-variant transition-colors" onclick="setQuestion('Do I have to attend the court in person on 18 April?')" type="button">
+            "Do I have to attend?"
+          </button>
+<button class="px-space-sm py-1.5 bg-surface-container-low hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm rounded-[4px] border border-outline-variant transition-colors" onclick="setQuestion('What did the judge order for the builder?')" type="button">
+            "What did the judge order for the builder?"
+          </button>
+<button class="px-space-sm py-1.5 bg-surface-container-low hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm rounded-[4px] border border-outline-variant transition-colors" onclick="setQuestion('Is my stay order still valid?')" type="button">
+            "Is the stay order valid?"
+          </button>
+</div>
+</div>
+<!-- Q&A Response Display Area -->
+<div class="hidden p-space-md bg-surface-container-low border border-outline-variant rounded-[4px] space-y-space-xs" id="qa-answer-area">
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-primary-container">
+<span class="material-symbols-outlined text-[16px]">help_center</span>
+<span class="font-semibold" id="qa-query-display"></span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed" id="qa-reply-display"></p>
+<span class="font-label-sm text-label-sm text-outline block pt-1">Source: Page 2, Paragraph 4-5 of Order Exhibit 5</span>
+</div>
+<!-- Question Input Form -->
+<form class="flex flex-col sm:flex-row gap-space-sm pt-space-xs" onsubmit="handleQuestionSubmit(event)">
+<div class="relative flex-1">
+<input class="w-full min-h-[44px] px-space-md py-2 bg-surface-container-lowest border border-outline-variant rounded-[4px] font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:outline-none" id="question-input" placeholder="e.g. When do I need to submit my documents?" type="text"/>
+</div>
+<button class="min-h-[44px] px-space-xl bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg rounded-[4px] inline-flex items-center justify-center gap-space-xs transition-colors shrink-0" type="submit">
+<span>Ask</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</form>
+</section>
+</div>
+</div>
+<script>
+  let currentLanguage = 'en';
+
+  const marathiContent = {
+    hearingTitle: "तुमच्या पुढील सुनावणीची तारीख",
+    hearingNote: "<strong>तुम्हाला स्वतः न्यायालयात हजर राहण्याची गरज नाही.</strong> तुमचे वकील न्यायाधीशांसमोर लेखी कागदपत्रे सादर करतील.",
+    summaryTitle: "हा दस्तऐवज काय सांगतो?",
+    summarySubtitle: "दिवाणी न्यायाधीशांच्या १४ पानांच्या आदेशाचा सोप्या मराठीत सारांश",
+    chatHeading: "काही प्रश्न आहेत का? साध्या शब्दांत विचारा.",
+    chatSubtext: "उत्तरे केवळ या आदेश पत्रावरून दिली जातात, त्यामुळे ती पूर्णपणे अधिकृत आहेत.",
+    points: [
+      {
+        title: "तुमच्या जमिनीवरील स्थगिती (Stay) कायम आहे",
+        body: "अंतिम निकाल लागेपर्यंत बिल्डरला <strong>सर्व्हे क्र. ४२/३</strong> वर कोणतेही बांधकाम करण्यास किंवा भूखंड विकण्यास मनाई आहे."
+      },
+      {
+        title: "बिल्डरला १९९८ चा मूळ करारनामा सादर करण्याचे निर्देश",
+        body: "बिल्डरच्या वकिलांनी पुढील तारखेला न्यायाधीशांच्या तपासणीसाठी मूळ नोंदणीकृत करारनामा आणणे बंधनकारक आहे."
+      },
+      {
+        title: "जागेवर 'जैसे थे' (Status Quo) परिस्थिती ठेवण्याचे आदेश",
+        body: "दोन्ही पक्षांनी जमिनीची सध्याची परिस्थिती जशी आहे तशीच ठेवण्याचे आदेश आहेत. कोणीही कुंपण किंवा बदल करू शकत नाही."
+      }
+    ]
+  };
+
+  const englishContent = {
+    hearingTitle: "YOUR NEXT HEARING DATE",
+    hearingNote: "<strong>You do not need to attend this hearing in person.</strong> The advocates will present written papers to the judge.",
+    summaryTitle: "What this document says",
+    summarySubtitle: "Plain English summary of the 14-page court order issued by the Civil Judge",
+    chatHeading: "Have a question? Ask in plain words.",
+    chatSubtext: "Answers come only from this document, so they're accurate to your case.",
+    points: [
+      {
+        title: "The stay on your property remains active",
+        body: "The builder cannot start construction or sell any plots on <strong>Survey No. 42/3</strong> until the final verdict. Your peaceful possession is officially protected by court order."
+      },
+      {
+        title: "Builder instructed to produce the original 1998 deed",
+        body: "The builder's lawyer must bring the original 1998 registered land agreement to court on the next date for direct inspection by the judge."
+      },
+      {
+        title: "Status quo on the ground",
+        body: "Both parties are directed to maintain the status of the land as it exists today. Neither side may alter boundaries or erect fencing."
+      }
+    ]
+  };
+
+  function setLanguage(lang) {
+    currentLanguage = lang;
+    const btnEn = document.getElementById('lang-btn-en');
+    const btnMr = document.getElementById('lang-btn-mr');
+
+    if (lang === 'mr') {
+      btnMr.className = "px-space-md py-1 font-label-md text-label-md rounded-[2px] bg-primary-container text-on-primary font-semibold transition-all";
+      btnEn.className = "px-space-md py-1 font-label-md text-label-md rounded-[2px] text-on-surface-variant hover:text-on-surface transition-all";
+
+      document.getElementById('label-hearing-title').innerText = marathiContent.hearingTitle;
+      document.getElementById('label-hearing-note').innerHTML = marathiContent.hearingNote;
+      document.getElementById('section-summary-title').innerText = marathiContent.summaryTitle;
+      document.getElementById('section-summary-subtitle').innerText = marathiContent.summarySubtitle;
+      document.getElementById('chat-heading').innerText = marathiContent.chatHeading;
+      document.getElementById('chat-subtext').innerText = marathiContent.chatSubtext;
+
+      applyPoints(marathiContent.points);
+    } else {
+      btnEn.className = "px-space-md py-1 font-label-md text-label-md rounded-[2px] bg-primary-container text-on-primary font-semibold transition-all";
+      btnMr.className = "px-space-md py-1 font-label-md text-label-md rounded-[2px] text-on-surface-variant hover:text-on-surface transition-all";
+
+      document.getElementById('label-hearing-title').innerText = englishContent.hearingTitle;
+      document.getElementById('label-hearing-note').innerHTML = englishContent.hearingNote;
+      document.getElementById('section-summary-title').innerText = englishContent.summaryTitle;
+      document.getElementById('section-summary-subtitle').innerText = englishContent.summarySubtitle;
+      document.getElementById('chat-heading').innerText = englishContent.chatHeading;
+      document.getElementById('chat-subtext').innerText = englishContent.chatSubtext;
+
+      applyPoints(englishContent.points);
+    }
+  }
+
+  function applyPoints(pts) {
+    for (let i = 0; i < pts.length; i++) {
+      const container = document.getElementById('point-' + (i + 1));
+      if (container) {
+        const titleEl = container.querySelector('h3');
+        const descEl = container.querySelector('p');
+        if (titleEl) titleEl.innerHTML = pts[i].title;
+        if (descEl) descEl.innerHTML = pts[i].body;
+      }
+    }
+  }
+
+  function toggleRawSection() {
+    const content = document.getElementById('raw-text-content');
+    const arrow = document.getElementById('raw-toggle-arrow');
+    const button = document.getElementById('raw-text-toggle');
+
+    const isHidden = content.classList.contains('hidden');
+    if (isHidden) {
+      content.classList.remove('hidden');
+      arrow.classList.add('rotate-90');
+      button.setAttribute('aria-expanded', 'true');
+    } else {
+      content.classList.add('hidden');
+      arrow.classList.remove('rotate-90');
+      button.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  function setQuestion(txt) {
+    const input = document.getElementById('question-input');
+    input.value = txt;
+    input.focus();
+  }
+
+  function handleQuestionSubmit(e) {
+    e.preventDefault();
+    const input = document.getElementById('question-input');
+    const q = input.value.trim();
+    if (!q) return;
+
+    const answerArea = document.getElementById('qa-answer-area');
+    const queryDisplay = document.getElementById('qa-query-display');
+    const replyDisplay = document.getElementById('qa-reply-display');
+
+    queryDisplay.innerText = '"' + q + '"';
+
+    const lower = q.toLowerCase();
+    if (lower.includes('attend') || lower.includes('in person') || lower.includes('come')) {
+      replyDisplay.innerText = "No, you do not need to attend court on 18 April 2025. Your advocate (Adv. S. Sharma) will submit the paperwork and original deeds on your behalf.";
+    } else if (lower.includes('stay') || lower.includes('valid')) {
+      replyDisplay.innerText = "Yes, your stay order is 100% active and protected under Exhibit 5. The builder is completely barred from building or selling any land on Survey 42/3.";
+    } else if (lower.includes('builder') || lower.includes('order')) {
+      replyDisplay.innerText = "The judge ordered the builder to halt all construction immediately and strictly produce the 1998 registered deed in court on 18 April 2025.";
+    } else {
+      replyDisplay.innerText = "Based on this court order dated 12 March 2024, the stay is confirmed, the next date is 18 April 2025 for written submissions, and neither party may alter the land.";
+    }
+
+    answerArea.classList.remove('hidden');
+    input.value = '';
+  }
+
+  function copyHearingReminder() {
+    const text = "Hearing Reminder: Pune Civil Court Hall 4, Civil Suit 418/2024 on 18 April 2025 at 10:30 AM.";
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('btn-calendar-text');
+      const orig = btn.innerText;
+      btn.innerText = "Date Copied!";
+      setTimeout(() => { btn.innerText = orig; }, 2000);
+    }).catch(() => {
+      alert("Next Hearing: 18 April 2025 at Hall No. 4, Pune Civil Court");
+    });
+  }
+</script></main></div></body></html>
