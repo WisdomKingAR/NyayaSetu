@@ -61,9 +61,9 @@ export const config = {
 
   gemini: {
     apiKey: requireEnv('GEMINI_API_KEY'),
-    // Default to gemini-2.0-flash — a real, stable, fast model.
+    // Default to gemini-3.6-flash — latest active flash model.
     // Override via GEMINI_MODEL env var if needed.
-    model: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
+    model: process.env.GEMINI_MODEL || 'gemini-3.6-flash',
   },
 
   cors: {
