@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { uploadDocument, processDocument } from '@/lib/apiClient';
+import { uploadDocument, processDocument, getDocument } from '@/lib/apiClient';
 
 type UploadState = 'idle' | 'dragover' | 'uploading' | 'error';
 
@@ -52,10 +52,12 @@ export function UploadZone({ onSuccess, onUploadComplete, compact = false }: Upl
       // Cold-start banner after 5s
       coldStartTimer.current = setTimeout(() => setShowColdStartNotice(true), 5000);
 
+      let currentDocId: string | undefined;
       try {
         setProgress(20);
         const uploadRes = await uploadDocument(file);
         const documentId: string = uploadRes.data?.documentId;
+        currentDocId = documentId;
         if (!documentId) throw new Error('Upload failed — no document ID returned');
 
         setProgress(40);
@@ -76,6 +78,18 @@ export function UploadZone({ onSuccess, onUploadComplete, compact = false }: Upl
       } catch (err: unknown) {
         clearTimeout(coldStartTimer.current);
         setShowColdStartNotice(false);
+        if (currentDocId) {
+          try {
+            const check = await getDocument(currentDocId);
+            if (check?.data?.status === 'complete') {
+              setProgress(100);
+              if (onUploadComplete) onUploadComplete(currentDocId);
+              else if (onSuccess) onSuccess(currentDocId);
+              else router.push(`/documents/${currentDocId}`);
+              return;
+            }
+          } catch {}
+        }
         setState('error');
         const message =
           err instanceof Error ? err.message : 'Upload failed. Please try again.';

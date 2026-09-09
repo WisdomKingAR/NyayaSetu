@@ -4,7 +4,7 @@ const BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000').re
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
-  timeout: 35_000, // 35s — Sarvam OCR can be slow
+  timeout: 120_000, // 120s - AI extraction & translation pipeline
   headers: {
     'Content-Type': 'application/json',
   },
@@ -57,7 +57,7 @@ export async function uploadDocument(file: File, userId?: string) {
 
 /** Trigger the OCR → Summarize → Translate pipeline */
 export async function processDocument(documentId: string) {
-  const response = await apiClient.post(`/api/documents/${documentId}/process`);
+  const response = await apiClient.post(`/api/documents/${documentId}/process`, null, { timeout: 120_000 });
   return response.data;
 }
 
