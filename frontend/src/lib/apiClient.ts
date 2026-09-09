@@ -1,6 +1,9 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-const BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000').replace(/\/+$/, '');
+// In production (Vercel) NEXT_PUBLIC_API_URL must point to the Render backend.
+// Fallback to the known Render URL so uploads work even if env var is missing.
+const RENDER_BACKEND = 'https://nyayasetu-api-ohnr.onrender.com';
+const BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? RENDER_BACKEND).replace(/\/+$/, '');
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
