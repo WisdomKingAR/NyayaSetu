@@ -27,7 +27,7 @@ export const translationService = {
   ): Promise<string> {
     try {
       const response = await fetch(
-        `${config.sarvam.baseUrl}/v1/translate`,
+        `${config.sarvam.baseUrl}/translate`,
         {
           method: 'POST',
           headers: {
