@@ -20,7 +20,7 @@ export function UploadZone({ onSuccess, onUploadComplete, compact = false }: Upl
   const [fileSize, setFileSize] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showColdStartNotice, setShowColdStartNotice] = useState(false);
-  const coldStartTimer = useRef<ReturnType<typeof setTimeout>>();
+  const coldStartTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const formatSize = (bytes: number) => {
